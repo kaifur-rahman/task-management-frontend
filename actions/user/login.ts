@@ -1,9 +1,7 @@
 "use server";
-
 import { ILoginAction } from "@/interface/login";
-import { postLoginRoute } from "@/api/routes/login";
+import { postLoginRoute } from "@/api/routes/users";
 import { redirect } from "next/navigation";
-import { encrypt } from "@/utils/encryptDecrypt";
 import { cookies } from "next/headers";
 
 export async function loginAction(
@@ -59,11 +57,17 @@ export async function loginAction(
           refreshToken = cookieStr.split(";")[0].split("=")[1];
         }
       });
-      const encryptedAccess = encrypt(accessToken);
-      const encryptRefresh = encrypt(refreshToken);
       const cookieStore = await cookies();
-      cookieStore.set("u_aid", encryptedAccess, { maxAge: 60 * 10 });
-      cookieStore.set("u_rid", encryptRefresh, { maxAge: 24 * 60 * 60 * 7 });
+      cookieStore.set("u_aid", accessToken, {
+        maxAge: 600, //TODO:change in prod in sync with backend
+        httpOnly: true,
+        secure: false, //TODO: in prod change it
+      });
+      cookieStore.set("u_rid", refreshToken, {
+        maxAge: 3600, //TODO:change in prod in sync with backend
+        secure: false, //TODO: in prod change it to true
+        httpOnly: true,
+      });
     }
   } catch (err) {
     return {
@@ -72,5 +76,5 @@ export async function loginAction(
       username: "",
     };
   }
-  redirect("/dashboard");
+  redirect("/");
 }

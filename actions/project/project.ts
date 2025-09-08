@@ -1,5 +1,5 @@
 import { apiClient } from "@/api/apiClient";
-import { getProjectsRoute } from "@/api/routes/project";
+import { getProjectsRoute } from "@/api/routes/projects";
 
 export async function getProjects() {
   const { success, message, data } = await apiClient(

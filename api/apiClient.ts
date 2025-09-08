@@ -1,33 +1,21 @@
 import { IAPIRequestOptions, IAPIResponse } from "@/interface/api";
 import { cookies } from "next/headers";
-import { decrypt } from "@/utils/encryptDecrypt";
 
 export async function apiClient(
   endpoint: string,
   options: IAPIRequestOptions = {},
-  tokenReq: boolean
+  tokenReq: boolean,
+  refresh: boolean = false
 ): Promise<IAPIResponse> {
   const { method = "GET", payload, headers } = options;
 
   try {
-    let token: string | undefined = undefined;
+    let u_aid: string | undefined = undefined;
+    let u_rid: string | undefined = undefined;
     if (tokenReq) {
       const cookieStore = await cookies();
-
-      const u_aid = cookieStore.get("u_aid");
-      const u_rid = cookieStore.get("u_rid");
-
-      if (!u_rid) {
-        //no refresh token logout
-        cookieStore.delete("u_aid");
-        cookieStore.delete("u_rid");
-        //TODO:re route to login page
-      }
-      if (!u_aid) {
-        //TODO: attemp refresh
-      } else {
-        token = decrypt(u_aid.value);
-      }
+      u_aid = cookieStore.get("u_aid")?.value;
+      u_rid = cookieStore.get("u_rid")?.value;
     }
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API_URL}${endpoint}`,
@@ -36,7 +24,7 @@ export async function apiClient(
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...{ Authorization: `Bearer ${refresh ? u_rid : u_aid}` },
           ...headers,
         },
         body: method !== "GET" && payload ? JSON.stringify(payload) : undefined,
@@ -46,12 +34,12 @@ export async function apiClient(
     if (res.status == 401) {
       return {
         success: false,
-        message: "Not Authorized: Login to access resource",
+        message: "Not Authorized",
         data: null,
       };
     }
-    let responseData: any;
 
+    let responseData: any;
     try {
       responseData = await res.json();
     } catch {
@@ -62,13 +50,15 @@ export async function apiClient(
       success: responseData?.success ?? res.ok,
       message:
         responseData?.message ??
-        (res.ok ? "Request successful" : "Request failed"),
+        (res.ok
+          ? "Request was successful but no message received"
+          : "Request failed"),
       data: responseData?.data ?? null,
     };
   } catch (err) {
     return {
       success: false,
-      message: "Something went wrong with our server",
+      message: "Something went wrong while fetching data",
       data: null,
     };
   }

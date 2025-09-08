@@ -1,3 +1,4 @@
+//only works on nodejs env not in edge env
 import Cryptr from "cryptr";
 
 let cryptr: Cryptr | null = null;
