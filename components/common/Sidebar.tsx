@@ -2,12 +2,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/constants/sidebar";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { logoutAction } from "@/actions/user/logout";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 function Sidebar() {
   const pathname = usePathname();
-
+  const router = useRouter();
+  const handleLogout = async () => {
+    await logoutAction();
+    localStorage.clear();
+    router.replace("/login");
+  };
   return (
     <div
       className="group bg-secondary h-full w-[4rem] hover:w-[14rem] fixed z-50 hidden md:flex 
@@ -64,7 +70,10 @@ group-hover:text-white`}
       </div>
 
       {/* Sign out */}
-      <div className="flex items-center gap-3 text-white p-4 hover:bg-white/10 rounded-md hover:cursor-pointer">
+      <div
+        className="flex items-center gap-3 text-white p-4 hover:bg-white/10 rounded-md hover:cursor-pointer"
+        onClick={handleLogout}
+      >
         <LogoutOutlinedIcon />
         <span
           className="whitespace-nowrap opacity-0 group-hover:opacity-100 

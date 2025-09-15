@@ -1,7 +1,7 @@
-import React from "react";
+import Team from "@/components/team/Team";
 
 function page() {
-  return <div>Team Management</div>;
+  return <Team />;
 }
 
 export default page;

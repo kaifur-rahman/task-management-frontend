@@ -58,7 +58,7 @@ export async function apiClient(
   } catch (err) {
     return {
       success: false,
-      message: "Something went wrong while fetching data",
+      message: "Something went wrong: " + err,
       data: null,
     };
   }

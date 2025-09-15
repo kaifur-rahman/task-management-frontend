@@ -1,7 +1,7 @@
 interface ILoginAction {
   success: boolean;
   message: string;
-  username: string;
+  user: string;
 }
 
 export type { ILoginAction };

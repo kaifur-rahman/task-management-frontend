@@ -1,14 +1,20 @@
 "use client";
 import { useActionState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/user/login";
 
 function Login() {
+  const router = useRouter();
   const [formStatus, formAction, isPending] = useActionState(loginAction, {
     message: "",
     success: false,
-    username: "",
+    user: "",
   });
+
+  if (formStatus.success) {
+    router.push("/");
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 w-[90%] md:w-100">
@@ -35,7 +41,7 @@ function Login() {
           type="text"
           placeholder="Employee ID"
           name="username"
-          defaultValue={formStatus?.username ?? ""}
+          defaultValue={formStatus?.user ?? ""}
           required
         ></input>
         <input

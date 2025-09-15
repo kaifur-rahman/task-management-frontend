@@ -25,9 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`w-full h-full ${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <div className="w-full h-full flex justify-center items-center">
+        <div id="modal-container"></div>
+        <div
+          id="main-container"
+          className="w-full h-full flex justify-center items-center"
+        >
           {children}
         </div>
       </body>

@@ -21,6 +21,7 @@ body,
   --color-primary3: #d3622a;
   --color-secondary: #2d2e2d;
   --color-light: #b1b1b1;
+  --color-secondaryText: #8b8b8b;
 }
 
 body {

@@ -1,7 +1,6 @@
 "use server";
 import { ILoginAction } from "@/interface/login";
 import { postLoginRoute } from "@/api/routes/users";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function loginAction(
@@ -10,15 +9,18 @@ export async function loginAction(
 ): Promise<ILoginAction> {
   const username = formData.get("username")?.toString() || "";
   const password = formData.get("password")?.toString() || "";
+  const response = {
+    message: "",
+    success: false,
+    user: "",
+  };
 
   //validation
   if (!username || !password) {
-    return {
-      message: "Please provide username and password",
-      success: false,
-      username: "",
-    };
+    response.message = "Please provide username and password";
+    return response;
   }
+
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API_URL}${postLoginRoute()}`,
@@ -34,11 +36,9 @@ export async function loginAction(
 
     const data = await res.json();
     if (!data.success) {
-      return {
-        message: data.message,
-        success: data.success,
-        username: username,
-      };
+      response.message = data.message;
+      response.user = data.message === "Invalid credentials" ? username : "";
+      return response;
     }
     //get tokens
     const setCookie = res.headers.get("set-cookie");
@@ -60,7 +60,7 @@ export async function loginAction(
       const cookieStore = await cookies();
       cookieStore.set("u_aid", accessToken, {
         maxAge: 600, //TODO:change in prod in sync with backend
-        httpOnly: true,
+        httpOnly: false,
         secure: false, //TODO: in prod change it
       });
       cookieStore.set("u_rid", refreshToken, {
@@ -68,13 +68,16 @@ export async function loginAction(
         secure: false, //TODO: in prod change it to true
         httpOnly: true,
       });
+      response.message = data.message;
+      response.success = data.success;
+      response.user = username;
     }
   } catch (err) {
     return {
       message: "Something went wrong",
       success: false,
-      username: "",
+      user: "",
     };
   }
-  redirect("/");
+  return response;
 }
