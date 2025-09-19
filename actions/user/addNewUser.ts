@@ -17,7 +17,7 @@ export async function addNewUserAction(
   const newMember = {
     empId: formData.get("empId"),
     firstName: formData.get("firstName"),
-    lastName: formData.get("lastName"),
+    lastName: formData.get("lastName") == "" ? null : formData.get("lastName"),
     email: formData.get("email") == "" ? null : formData.get("email"),
     phone: formData.get("phone"),
     role: formData.get("role"),

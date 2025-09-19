@@ -21,8 +21,12 @@ export const postCreateUser = () => {
 export const putUpdateUserRoute = (empId: string) => {
   return `/users/update/${empId}`;
 };
-export const getUsers = () => {
+export const getUsersRoute = () => {
   return "/users";
+};
+
+export const getMembersForProjectRoute = () => {
+  return "/users/members-for-project";
 };
 
 export const deleteUserRoute = (empId: string) => {

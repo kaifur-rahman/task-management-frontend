@@ -1,0 +1,115 @@
+import { IProject } from "@/interface/projects";
+import { IconButton } from "@mui/material";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import CallMadeIcon from "@mui/icons-material/CallMade";
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
+import { createNewProjectAction } from "@/actions/project/createNewProjects";
+import { updateArchivedAction } from "@/actions/project/updateArchived";
+
+type TProject = {
+  project: IProject;
+};
+
+async function Project({ project }: TProject) {
+  const userEmpId = await getUserEmpId();
+  const userRole = await getUserRole();
+  console.log(project);
+
+  const handleArchiveProject = () => {
+    console.log("arhived target");
+  };
+  const handleUnarchiveProject = () => {};
+  return (
+    <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
+      <div className=" flex flex-row justify-between items-center">
+        <h6 className="font-bold tracking-normal">{project.name}</h6>
+        <div className="flex flex-row gap-2 justify-end items-end">
+          {userEmpId == project.lead.emp_id || userRole == "Admin" ? (
+            <div className="group">
+              <form id="project-archived-form" action={updateArchivedAction}>
+                {/*pass project id and current value to formaction*/}
+                <input
+                  type="hidden"
+                  name="projectId"
+                  value={project?.project_id}
+                />
+                <input
+                  type="hidden"
+                  name="archived"
+                  value={project?.archived ? "true" : "false"}
+                />
+                <IconButton
+                  form={"project-archived-form"}
+                  type="submit"
+                  size="small"
+                  sx={{ color: "", ml: "" }}
+                >
+                  {project?.archived ? (
+                    <UnarchiveOutlinedIcon />
+                  ) : (
+                    <ArchiveOutlinedIcon />
+                  )}
+                  <span className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white">
+                    {project?.archived ? "Unarchive" : "Archive"}
+                  </span>
+                </IconButton>
+              </form>
+            </div>
+          ) : null}
+          <div className="group">
+            <IconButton size="small" sx={{ color: "", ml: "" }}>
+              <Diversity3Icon />
+              <div
+                className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white whitespace-normal"
+                style={{ width: "max-content" }}
+              >
+                {project.lead.emp_id} {project.lead.first_name}{" "}
+                {project.lead.last_name} <span className="italic">(Lead)</span>
+                {project.members?.map((member) => (
+                  <h6 key={member.emp_id} className="text-start">
+                    {member.emp_id} {member.first_name} {member.last_name}
+                  </h6>
+                ))}
+              </div>
+            </IconButton>
+          </div>
+          <div className="group">
+            <IconButton size="small" sx={{ color: "#faa325", ml: "0.1rem" }}>
+              <CallMadeIcon />
+              <span className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white">
+                Details
+              </span>
+            </IconButton>
+          </div>
+        </div>
+      </div>
+      <h6 className="mt-2 text-secondaryText line-clamp-2 font-extralight">
+        {project.description}
+      </h6>
+      {/* auto progress */}
+      {/* other details */}
+      <div className="flex justify-between">
+        <div>
+          <h6 className="text-sm text-secondaryText font-light italic">
+            {project.priority}
+          </h6>
+        </div>
+        <div>
+          <h6 className="text-sm text-secondaryText font-light">
+            {project.category}
+          </h6>
+        </div>
+        {/* lead */}
+        <div>
+          <h6 className="text-sm text-secondaryText font-bold">
+            {project.lead.first_name}
+          </h6>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Project;

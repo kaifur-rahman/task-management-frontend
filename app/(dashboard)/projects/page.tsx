@@ -1,7 +1,7 @@
-import React from "react";
+import MyProjects from "@/components/projects/MyProjects";
 
 function page() {
-  return <div>Project</div>;
+  return <MyProjects />;
 }
 
 export default page;

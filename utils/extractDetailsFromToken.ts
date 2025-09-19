@@ -24,7 +24,10 @@ const decodeJWTPayload = async () => {
   }
   return payload;
 };
-
+export const getUserEmpId = async (): Promise<string | undefined> => {
+  const payload = await decodeJWTPayload();
+  return payload?.username;
+};
 export const getUserName = async (): Promise<string | undefined> => {
   const payload = await decodeJWTPayload();
   return payload?.username;

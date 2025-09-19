@@ -1,37 +1,29 @@
 "use client";
 import { useActionState } from "react";
 import { createPortal } from "react-dom";
-import AddNewMemberForm from "./AddNewMemberForm";
-import { addNewUserAction } from "@/actions/user/addNewUser";
-import { updateUserDetailsAction } from "@/actions/user/updateUserDetails";
-
-type TAddEditUserModal = {
+import { createNewProjectAction } from "@/actions/project/createNewProjects";
+import NewProjectForm from "./AddNewProjectForm";
+type TAddNewProjectModal = {
   title: string;
   actionBtnLabel: string;
   actionBtnLabelOnPending: string;
-  edit: boolean;
   editValues?: any;
   onCancel?: () => void;
   containerId: string;
 };
 
-function AddEditUserModal({
+function AddNewProjectModal({
   title,
   actionBtnLabel,
   actionBtnLabelOnPending,
-  edit,
-  editValues,
   onCancel,
   containerId,
-}: TAddEditUserModal) {
-  const [addUserFormStatus, addUserFormAction, addUserIsPending] =
-    useActionState(addNewUserAction, "");
-
-  const [updateUserFormStatus, updateUserFormAction, updateUserIsPending] =
-    useActionState(updateUserDetailsAction, "");
-
-  const previousAddUserValues = addUserFormStatus?.data;
-  const previousUpdateUserValues = updateUserFormStatus?.data;
+}: TAddNewProjectModal) {
+  const [
+    createNewProjectFormStatus,
+    createNewProjectFormAction,
+    creatingProjectIsPending,
+  ] = useActionState(createNewProjectAction, "");
 
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">
@@ -41,28 +33,19 @@ function AddEditUserModal({
           <h6 className="font-extrabold text-xl tracking-wide">{title}</h6>
           {/* error message */}
           <h6 className="text-red-500 font-semibold mt-2 -mb-4 pl-2">
-            {edit
-              ? // edit mode show update errors
-                !updateUserFormStatus?.success && updateUserFormStatus?.message
-                ? updateUserFormStatus?.message.includes(
+            {
+              // add mode show add errors
+              !createNewProjectFormStatus?.success &&
+              createNewProjectFormStatus?.message
+                ? createNewProjectFormStatus?.message.includes(
                     "UNIQUE constraint failed"
                   )
                   ? "Email/Phone already exists"
-                  : updateUserFormStatus?.message
+                  : createNewProjectFormStatus?.message
                 : ""
-              : // add mode show add errors
-              !addUserFormStatus?.success && addUserFormStatus?.message
-              ? addUserFormStatus?.message.includes("UNIQUE constraint failed")
-                ? "Email/Phone already exists"
-                : addUserFormStatus?.message
-              : ""}
+            }
           </h6>
-          <AddNewMemberForm
-            edit={edit}
-            action={edit ? updateUserFormAction : addUserFormAction}
-            values={edit ? previousUpdateUserValues : previousAddUserValues}
-            editValues={editValues}
-          />
+          <NewProjectForm action={createNewProjectFormAction} />
           <div className="w-full flex justify-end gap-10">
             <button
               onClick={onCancel}
@@ -72,11 +55,11 @@ function AddEditUserModal({
             </button>
             <button
               type="submit"
-              disabled={edit ? updateUserIsPending : addUserIsPending}
-              form="add-member-form"
+              disabled={creatingProjectIsPending}
+              form="add-project-form"
               className="bg-primary w-[6rem] rounded-md text-white hover:cursor-pointer hover:bg-primary/90 font-semibold tracking-wide active:bg-primary/70 disabled:cursor-not-allowed disabled:bg-primary/30"
             >
-              {(edit && updateUserIsPending) || (!edit && addUserIsPending)
+              {creatingProjectIsPending
                 ? actionBtnLabelOnPending
                 : actionBtnLabel}
             </button>
@@ -88,4 +71,4 @@ function AddEditUserModal({
   );
 }
 
-export default AddEditUserModal;
+export default AddNewProjectModal;

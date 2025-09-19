@@ -1,9 +1,9 @@
 import { apiClient } from "@/api/apiClient";
-import { getProjectsRoute } from "@/api/routes/projects";
+import { getArchivedProjectsRoute } from "@/api/routes/projects";
 
-export async function getProjects() {
+export async function getArchivedProjectsAction() {
   const { success, message, data } = await apiClient(
-    getProjectsRoute(),
+    getArchivedProjectsRoute(),
     {
       method: "GET",
     },
@@ -11,6 +11,5 @@ export async function getProjects() {
   );
   console.log(success);
   console.log(message);
-  console.log(data);
-  return { data };
+  return { success, message, data };
 }

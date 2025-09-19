@@ -44,7 +44,7 @@ function Sidebar() {
             href={navItem.url}
             className={`group flex gap-3 text-white  rounded-md p-2 
                        transition-colors duration-200 group-hover:cursor-pointer ${
-                         pathname == `${navItem.url}`
+                         navItem.paths.includes(pathname)
                            ? "group-hover:bg-primary2 hover:bg-primary2"
                            : "hover:bg-white/10"
                        } active:bg-primary/10`}
@@ -53,7 +53,9 @@ function Sidebar() {
             {/* Icon always visible */}
             <navItem.Icon
               className={`transition-colors duration-200 ${
-                pathname === `${navItem.url}` ? "text-[#faa325]" : "text-white"
+                navItem.paths.includes(pathname)
+                  ? "text-[#faa325]"
+                  : "text-white"
               }
 group-hover:text-white`}
             />

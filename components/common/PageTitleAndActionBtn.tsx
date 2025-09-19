@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react";
 
 type TPageTitleAndActionBtn = {
   pageTitle: string;
-  actionBtnLabel?: string;
+  actionBtnLabel?: string | null;
   onClickAction?: () => void;
   modalComponent?: ReactNode;
 };

@@ -24,7 +24,6 @@ function AddNewMemberForm({
   const [role, setRole] = useState(
     edit ? editValues?.role ?? "" : values?.role ?? ""
   );
-  console.log(role);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -36,7 +35,7 @@ function AddNewMemberForm({
   const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRole(e.target.value);
   };
-
+  console.log(action);
   return (
     <>
       <form

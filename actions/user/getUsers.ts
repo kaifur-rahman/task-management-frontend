@@ -1,9 +1,9 @@
 "use server";
 import { apiClient } from "@/api/apiClient";
-import { getUsers } from "@/api/routes/users";
+import { getUsersRoute } from "@/api/routes/users";
 
 export const getUsersData = async () => {
-  const { success, message, data } = await apiClient(getUsers(), {}, true);
+  const { success, message, data } = await apiClient(getUsersRoute(), {}, true);
   console.log(success);
   console.log(message);
   console.log(data);
