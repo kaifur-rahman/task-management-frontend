@@ -1,7 +1,7 @@
-import Team from "@/components/team/Team";
+import TeamDataTable from "@/components/team/TeamDataTable";
 
 function page() {
-  return <Team />;
+  return <TeamDataTable />;
 }
 
 export default page;

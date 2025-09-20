@@ -56,7 +56,7 @@ function Login() {
           disabled={isPending}
           className="bg-primary rounded-xl h-12 p-2 text-white font-bold -mt-2 cursor-pointer hover:bg-primary/90 transition-colors active:bg-primary/70 disabled:opacity-50"
         >
-          Sign in
+          {isPending ? "Signing in..." : "Sign in"}
         </button>
         {!formStatus.success && (
           <p className="text-red-500">{formStatus.message}</p>

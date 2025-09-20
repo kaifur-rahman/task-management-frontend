@@ -4,12 +4,10 @@ import { revalidatePath } from "next/cache";
 import { putUpdateProjectRoute } from "@/api/routes/projects";
 
 export async function updateArchivedAction(formData: FormData) {
+  //TODO: Show success or fail on snackbar
   const projectId = formData.get("projectId")?.toString();
   const currentlyArchived = formData.get("archived") == "true" ? true : false;
-  console.log(projectId);
-  console.log(currentlyArchived);
   if (projectId) {
-    console.log("inside if");
     const { success, message, data } = await apiClient(
       putUpdateProjectRoute(projectId),
       {
@@ -18,7 +16,6 @@ export async function updateArchivedAction(formData: FormData) {
       },
       true
     );
-    console.log(message);
     revalidatePath("/projects");
   } else {
     //show error

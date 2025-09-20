@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 function ProjectFilterHeader() {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div className="mt-4 w-full flex justify-center items-center gap-6 mb-2">
       <Link

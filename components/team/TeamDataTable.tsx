@@ -1,13 +1,19 @@
 import ActionButtons from "./ActionButtons";
 import AccountStatus from "./AccountStatus";
+import { getUsersDataAction } from "@/actions/user/getUsers";
 import { IUserDetails } from "@/interface/user";
 import { manageTeamTableHeaders } from "@/constants/team/tableHeaders";
 
-type TeamDataTable = {
-  users: IUserDetails[];
-};
-
-function TeamDataTable({ users }: TeamDataTable) {
+async function TeamDataTable() {
+  const { success, message, data } = await getUsersDataAction();
+  if (!success) {
+    return (
+      <h6 className="h-100 flex flex-1 justify-center items-center text-center font-semibold  text-primary tracking-wider text-xl">
+        {message}
+      </h6>
+    );
+  }
+  const users = data;
   return users?.length == 0 ? (
     <h6 className="h-100 flex flex-1 justify-center items-center text-center text-primary tracking-wider font-semibold text-xl">
       No team members have been added yet.

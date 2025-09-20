@@ -24,14 +24,24 @@ function AddEditUserModal({
   onCancel,
   containerId,
 }: TAddEditUserModal) {
+  const initialResponse = { success: false, message: "", data: [] };
+
   const [addUserFormStatus, addUserFormAction, addUserIsPending] =
-    useActionState(addNewUserAction, "");
+    useActionState(addNewUserAction, initialResponse);
 
   const [updateUserFormStatus, updateUserFormAction, updateUserIsPending] =
-    useActionState(updateUserDetailsAction, "");
+    useActionState(updateUserDetailsAction, initialResponse);
 
   const previousAddUserValues = addUserFormStatus?.data;
   const previousUpdateUserValues = updateUserFormStatus?.data;
+
+  if (updateUserFormStatus?.success && onCancel) {
+    onCancel();
+  }
+
+  if (addUserFormStatus?.success && onCancel) {
+    onCancel();
+  }
 
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">

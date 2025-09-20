@@ -1,8 +1,9 @@
 "use client";
 import { useActionState } from "react";
 import { createPortal } from "react-dom";
-import { createNewProjectAction } from "@/actions/project/createNewProjects";
 import NewProjectForm from "./AddNewProjectForm";
+import { createNewProjectAction } from "@/actions/project/createNewProjects";
+
 type TAddNewProjectModal = {
   title: string;
   actionBtnLabel: string;
@@ -19,11 +20,16 @@ function AddNewProjectModal({
   onCancel,
   containerId,
 }: TAddNewProjectModal) {
+  const initialResponse = { success: false, message: "", data: [] };
   const [
     createNewProjectFormStatus,
     createNewProjectFormAction,
     creatingProjectIsPending,
-  ] = useActionState(createNewProjectAction, "");
+  ] = useActionState(createNewProjectAction, initialResponse);
+
+  if (createNewProjectFormStatus?.success && onCancel) {
+    onCancel();
+  }
 
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">

@@ -2,7 +2,6 @@
 import { apiClient } from "@/api/apiClient";
 import { putUpdateUserRoute } from "@/api/routes/users";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function updateUserDetailsAction(
   _state: string,
@@ -45,7 +44,7 @@ export async function updateUserDetailsAction(
       response.data = newMember;
       //show in snackbar
       revalidatePath("/team");
-      redirect("/team");
+      return response;
     }
   }
 }

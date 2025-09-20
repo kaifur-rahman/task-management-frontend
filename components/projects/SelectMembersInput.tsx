@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -20,9 +20,9 @@ const MenuProps = {
   },
 };
 
-interface SelectMembersInputProps {
+type SelectMembersInputProps = {
   onChange?: (selected: string[]) => void;
-}
+};
 
 export default function SelectMembersInput({
   onChange,

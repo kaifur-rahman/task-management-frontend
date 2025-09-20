@@ -35,7 +35,7 @@ function AddNewMemberForm({
   const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRole(e.target.value);
   };
-  console.log(action);
+
   return (
     <>
       <form

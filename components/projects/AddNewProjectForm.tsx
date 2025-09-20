@@ -2,7 +2,11 @@
 import SelectMembersInput from "./SelectMembersInput";
 import { projectCategory, projectPriority } from "@/constants/projects/project";
 
-function NewProjectForm({ action }) {
+type TNewProjectForm = {
+  action: any;
+};
+
+function NewProjectForm({ action }: TNewProjectForm) {
   return (
     <form
       id="add-project-form"

@@ -1,14 +1,14 @@
 "use server";
 import { apiClient } from "@/api/apiClient";
+import { IAPIResponse } from "@/interface/api";
 import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
 import { postCreateNewProjectRoute } from "@/api/routes/projects";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function createNewProjectAction(
   _state: string,
   formData: FormData
-): Promise<any> {
+): Promise<IAPIResponse> {
   const response = {
     success: false,
     message: "",
@@ -31,7 +31,6 @@ export async function createNewProjectAction(
     priority: formData.get("projectPriority"),
     category: formData.get("projectCategory"),
   };
-  console.log(newProject);
   //validation
   if (
     !newProject.name ||
@@ -58,7 +57,7 @@ export async function createNewProjectAction(
       response.message = message;
       response.data = {};
       revalidatePath("/projects");
-      redirect("/projects");
+      return response;
     }
   }
 }

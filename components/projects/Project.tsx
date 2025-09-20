@@ -1,12 +1,11 @@
-import { IProject } from "@/interface/projects";
 import { IconButton } from "@mui/material";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
+import { IProject } from "@/interface/projects";
 import CallMadeIcon from "@mui/icons-material/CallMade";
-import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
-import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
-import { createNewProjectAction } from "@/actions/project/createNewProjects";
 import { updateArchivedAction } from "@/actions/project/updateArchived";
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
+import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
 
 type TProject = {
   project: IProject;
@@ -15,12 +14,7 @@ type TProject = {
 async function Project({ project }: TProject) {
   const userEmpId = await getUserEmpId();
   const userRole = await getUserRole();
-  console.log(project);
 
-  const handleArchiveProject = () => {
-    console.log("arhived target");
-  };
-  const handleUnarchiveProject = () => {};
   return (
     <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
       <div className=" flex flex-row justify-between items-center">

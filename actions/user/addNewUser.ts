@@ -1,6 +1,5 @@
 "use server";
 import { apiClient } from "@/api/apiClient";
-import { redirect } from "next/navigation";
 import { postCreateUser } from "@/api/routes/users";
 import { revalidatePath } from "next/cache";
 
@@ -51,7 +50,7 @@ export async function addNewUserAction(
       response.data = {};
       //show in snackbar
       revalidatePath("/team");
-      redirect("/team");
+      return response;
     }
   }
 }

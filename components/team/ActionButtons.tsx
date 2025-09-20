@@ -82,6 +82,7 @@ function ActionButtons({ user }: TActionButtons) {
   return (
     <>
       <div className="flex flex-row">
+        {/* edit button */}
         <div className="group relative flex items-center justify-center">
           <button
             onClick={handleEditModal}
@@ -93,6 +94,7 @@ function ActionButtons({ user }: TActionButtons) {
             Edit
           </span>
         </div>
+        {/* lock unlock button */}
         <div className="group relative flex items-center justify-center">
           <button
             onClick={handleLockUnlockModal}
@@ -108,6 +110,7 @@ function ActionButtons({ user }: TActionButtons) {
             {user.status === "Active" ? "Lock" : "Unlock"}
           </span>
         </div>
+        {/* delete button */}
         <div className="group relative flex items-center justify-center">
           <button
             onClick={handleDeleteModal}
