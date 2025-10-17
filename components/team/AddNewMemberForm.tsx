@@ -3,16 +3,9 @@ import { useState } from "react";
 import { IconButton } from "@mui/material";
 import { IUserDetails } from "@/interface/user";
 import { roles, subRoles } from "@/constants/users";
-import { generatePassword } from "@/utils/generatePassword";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
+import { generatePassword } from "@/utils/generatePassword";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-
-type TAddNewMemberForm = {
-  edit: boolean;
-  action: any;
-  values: any;
-  editValues: IUserDetails;
-};
 
 function AddNewMemberForm({
   action,
@@ -93,7 +86,7 @@ function AddNewMemberForm({
               Select Role
             </option>
             {roles.map((role) => (
-              <option key={role} value={role}>
+              <option key={role} value={role} disabled={role == "Admin"}>
                 {role}
               </option>
             ))}
@@ -153,5 +146,12 @@ function AddNewMemberForm({
     </>
   );
 }
+
+type TAddNewMemberForm = {
+  edit: boolean;
+  action: any;
+  values: any;
+  editValues: IUserDetails;
+};
 
 export default AddNewMemberForm;

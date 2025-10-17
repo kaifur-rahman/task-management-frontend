@@ -1,5 +1,4 @@
 "use server";
-
 import crypto from "crypto";
 
 export async function generatePassword(length = 12) {

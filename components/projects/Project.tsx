@@ -7,16 +7,12 @@ import { updateArchivedAction } from "@/actions/project/updateArchived";
 import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
 
-type TProject = {
-  project: IProject;
-};
-
 async function Project({ project }: TProject) {
   const userEmpId = await getUserEmpId();
   const userRole = await getUserRole();
 
   return (
-    <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
+    <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between  border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
       <div className=" flex flex-row justify-between items-center">
         <h6 className="font-bold tracking-normal">{project.name}</h6>
         <div className="flex flex-row gap-2 justify-end items-end">
@@ -60,10 +56,14 @@ async function Project({ project }: TProject) {
                 style={{ width: "max-content" }}
               >
                 {project.lead.emp_id} {project.lead.first_name}{" "}
-                {project.lead.last_name} <span className="italic">(Lead)</span>
+                {project.lead.last_name}{" "}
+                <span className="italic">(P-Lead)</span>
                 {project.members?.map((member) => (
                   <h6 key={member.emp_id} className="text-start">
-                    {member.emp_id} {member.first_name} {member.last_name}
+                    {member.emp_id} {member.first_name} {member.last_name}{" "}
+                    <span className="italic text-xs text-primary">
+                      ({member.sub_role ?? member.role})
+                    </span>
                   </h6>
                 ))}
               </div>
@@ -79,6 +79,8 @@ async function Project({ project }: TProject) {
           </div>
         </div>
       </div>
+      <div className="w-full border-t border-gray-300 -mt-4"></div>
+
       <h6 className="mt-2 text-secondaryText line-clamp-2 font-extralight">
         {project.description}
       </h6>
@@ -105,5 +107,9 @@ async function Project({ project }: TProject) {
     </div>
   );
 }
+
+type TProject = {
+  project: IProject;
+};
 
 export default Project;

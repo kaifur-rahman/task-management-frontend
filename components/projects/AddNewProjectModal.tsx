@@ -4,15 +4,6 @@ import { createPortal } from "react-dom";
 import NewProjectForm from "./AddNewProjectForm";
 import { createNewProjectAction } from "@/actions/project/createNewProjects";
 
-type TAddNewProjectModal = {
-  title: string;
-  actionBtnLabel: string;
-  actionBtnLabelOnPending: string;
-  editValues?: any;
-  onCancel?: () => void;
-  containerId: string;
-};
-
 function AddNewProjectModal({
   title,
   actionBtnLabel,
@@ -76,5 +67,14 @@ function AddNewProjectModal({
     document.getElementById(containerId)
   );
 }
+
+type TAddNewProjectModal = {
+  title: string;
+  actionBtnLabel: string;
+  actionBtnLabelOnPending: string;
+  editValues?: any;
+  onCancel?: () => void;
+  containerId: string;
+};
 
 export default AddNewProjectModal;

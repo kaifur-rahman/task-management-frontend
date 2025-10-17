@@ -1,6 +1,6 @@
 import Project from "./Project";
-import { getAllProjectsAction } from "@/actions/project/getAllProjects";
 import { IProject } from "@/interface/projects";
+import { getAllProjectsAction } from "@/actions/project/getAllProjects";
 
 async function AllProjects() {
   const { success, message, data } = await getAllProjectsAction();

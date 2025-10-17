@@ -7,6 +7,7 @@ import { getUserRole } from "@/utils/extractDetailsFromToken";
 async function Projects() {
   const role = await getUserRole();
   const { success, message, data } = await getMyProjectsAction();
+
   if (!success) {
     return <h6>There is some problem loading this page</h6>;
   }

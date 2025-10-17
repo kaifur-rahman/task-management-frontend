@@ -1,23 +1,19 @@
 "use client";
 import { useState } from "react";
-import ConfirmationModal from "../common/ConfirmationModal";
+import { IUserDetails } from "@/interface/user";
 import AddEditUserModal from "./AddEditUserModal";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import ConfirmationModal from "../common/ConfirmationModal";
+import { deleteUserAction } from "@/actions/user/deleteUser";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {
   lockTeamMemberModalContent,
   unlockTeamMemberModalContent,
   deleteTeamMemberModalContent,
 } from "@/constants/team/modals";
-import { IUserDetails } from "@/interface/user";
-import { deleteUserAction } from "@/actions/user/deleteUser";
+import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import { updateUserStatusAction } from "@/actions/user/updateUserStatus";
-
-type TActionButtons = {
-  user: IUserDetails;
-};
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 function ActionButtons({ user }: TActionButtons) {
   const [editModal, setEditModal] = useState<boolean>(false);
@@ -181,5 +177,9 @@ function ActionButtons({ user }: TActionButtons) {
     </>
   );
 }
+
+type TActionButtons = {
+  user: IUserDetails;
+};
 
 export default ActionButtons;

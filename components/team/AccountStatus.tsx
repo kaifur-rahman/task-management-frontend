@@ -1,7 +1,3 @@
-type TAccountStatus = {
-  status: string;
-};
-
 function AccountStatus({ status }: TAccountStatus) {
   return (
     <div
@@ -23,5 +19,9 @@ function AccountStatus({ status }: TAccountStatus) {
     </div>
   );
 }
+
+type TAccountStatus = {
+  status: string;
+};
 
 export default AccountStatus;

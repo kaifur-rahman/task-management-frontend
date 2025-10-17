@@ -2,10 +2,6 @@
 import SelectMembersInput from "./SelectMembersInput";
 import { projectCategory, projectPriority } from "@/constants/projects/project";
 
-type TNewProjectForm = {
-  action: any;
-};
-
 function NewProjectForm({ action }: TNewProjectForm) {
   return (
     <form
@@ -59,5 +55,9 @@ function NewProjectForm({ action }: TNewProjectForm) {
     </form>
   );
 }
+
+type TNewProjectForm = {
+  action: any;
+};
 
 export default NewProjectForm;

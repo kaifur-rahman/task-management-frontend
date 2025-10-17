@@ -2,8 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/constants/sidebar";
-import { usePathname, useRouter } from "next/navigation";
 import { logoutAction } from "@/actions/user/logout";
+import { usePathname, useRouter } from "next/navigation";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 function Sidebar() {
@@ -14,6 +14,7 @@ function Sidebar() {
     localStorage.clear();
     router.replace("/login");
   };
+
   return (
     <div
       className="group bg-secondary h-full w-[4rem] hover:w-[14rem] fixed z-50 hidden md:flex 

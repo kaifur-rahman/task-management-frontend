@@ -1,10 +1,10 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import AirportShuttleOutlinedIcon from "@mui/icons-material/AirportShuttleOutlined";
-import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AirportShuttleOutlinedIcon from "@mui/icons-material/AirportShuttleOutlined";
 
 export const navItems = [
   { name: "Dashboard", url: "/", Icon: HomeOutlinedIcon, paths: ["/"] },
@@ -21,10 +21,10 @@ export const navItems = [
     paths: ["/tasks"],
   },
   {
-    name: "Products",
-    url: "/products",
+    name: "Stock List",
+    url: "/stock-list",
     Icon: Inventory2OutlinedIcon,
-    paths: ["/products"],
+    paths: ["/stock-list"],
   },
   {
     name: "Projects",

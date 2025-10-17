@@ -5,16 +5,6 @@ import AddNewMemberForm from "./AddNewMemberForm";
 import { addNewUserAction } from "@/actions/user/addNewUser";
 import { updateUserDetailsAction } from "@/actions/user/updateUserDetails";
 
-type TAddEditUserModal = {
-  title: string;
-  actionBtnLabel: string;
-  actionBtnLabelOnPending: string;
-  edit: boolean;
-  editValues?: any;
-  onCancel?: () => void;
-  containerId: string;
-};
-
 function AddEditUserModal({
   title,
   actionBtnLabel,
@@ -97,5 +87,15 @@ function AddEditUserModal({
     document.getElementById(containerId)
   );
 }
+
+type TAddEditUserModal = {
+  title: string;
+  actionBtnLabel: string;
+  actionBtnLabelOnPending: string;
+  edit: boolean;
+  editValues?: any;
+  onCancel?: () => void;
+  containerId: string;
+};
 
 export default AddEditUserModal;

@@ -1,6 +1,5 @@
-import React from "react";
-import PageTitleAndActionBtn from "@/components/common/PageTitleAndActionBtn";
 import AddEditUserModal from "@/components/team/AddEditUserModal";
+import PageTitleAndActionBtn from "@/components/common/PageTitleAndActionBtn";
 
 function layout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

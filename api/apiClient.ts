@@ -1,5 +1,6 @@
-import { IAPIRequestOptions, IAPIResponse } from "@/interface/api";
 import { cookies } from "next/headers";
+import { postRefreshTokenRoute } from "./routes/users";
+import { IAPIRequestOptions, IAPIResponse } from "@/interface/api";
 
 export async function apiClient(
   endpoint: string,
@@ -12,8 +13,8 @@ export async function apiClient(
   try {
     let u_aid: string | undefined = undefined;
     let u_rid: string | undefined = undefined;
+    const cookieStore = await cookies();
     if (tokenReq) {
-      const cookieStore = await cookies();
       u_aid = cookieStore.get("u_aid")?.value;
       u_rid = cookieStore.get("u_rid")?.value;
     }
@@ -31,12 +32,27 @@ export async function apiClient(
       }
     );
 
-    if (res.status == 401) {
-      return {
-        success: false,
-        message: "Not Authorized",
-        data: null,
-      };
+    if (res.status == 401 && !refresh && tokenReq) {
+      const refreshResponse = await apiClient(
+        postRefreshTokenRoute(),
+        { method: "POST" },
+        true,
+        true
+      );
+      if (refreshResponse.success && refreshResponse.data) {
+        cookieStore.set("u_aid", refreshResponse.data);
+        //now re-try
+        return await apiClient(endpoint, options, tokenReq);
+      } else {
+        //refresh also failed
+        cookieStore.delete("u_aid");
+        cookieStore.delete("u_rid");
+        return {
+          success: false,
+          message: "Session expired. Ploease login again",
+          data: null,
+        };
+      }
     }
 
     let responseData: any;

@@ -1,13 +1,5 @@
 "use client";
-
 import { ReactNode, useState } from "react";
-
-type TPageTitleAndActionBtn = {
-  pageTitle: string;
-  actionBtnLabel?: string | null;
-  onClickAction?: () => void;
-  modalComponent?: ReactNode;
-};
 
 function PageTitleAndActionBtn({
   pageTitle,
@@ -53,5 +45,12 @@ function PageTitleAndActionBtn({
     </>
   );
 }
+
+type TPageTitleAndActionBtn = {
+  pageTitle: string;
+  actionBtnLabel?: string | null;
+  onClickAction?: () => void;
+  modalComponent?: ReactNode;
+};
 
 export default PageTitleAndActionBtn;

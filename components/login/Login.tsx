@@ -1,7 +1,8 @@
 "use client";
-import { useActionState } from "react";
 import Image from "next/image";
+import { EyeOff, Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState, useActionState } from "react";
 import { loginAction } from "@/actions/user/login";
 
 function Login() {
@@ -11,6 +12,8 @@ function Login() {
     success: false,
     user: "",
   });
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   if (formStatus.success) {
     router.push("/");
@@ -44,13 +47,38 @@ function Login() {
           defaultValue={formStatus?.user ?? ""}
           required
         ></input>
-        <input
-          className="h-12 rounded-md p-2 border-solid border-light border focus:outline-none focus:ring-1 focus:ring-primary"
-          type="password"
-          placeholder="Password"
-          name="password"
-          required
-        ></input>
+        <div className="h-12 p-2 flex flex-row items-center border-solid border-light border focus-within:outline-none focus-within:ring-1 rounded-md  focus-within:ring-primary">
+          <input
+            className="h-full  w-full focus:outline-none"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            name="password"
+            required
+          ></input>
+          {showPassword ? (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="relative group flex items-center"
+            >
+              <Eye className="text-primary hover:cursor-pointer" />
+              <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white whitespace-nowrap shadow-md">
+                Hide
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="relative group flex items-center"
+            >
+              <EyeOff className="text-secondaryText hover:cursor-pointer" />
+              <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white whitespace-nowrap shadow-md">
+                Show
+              </span>
+            </button>
+          )}
+        </div>
         <button
           type="submit"
           disabled={isPending}

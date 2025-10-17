@@ -1,15 +1,7 @@
 "use client";
-import { createPortal } from "react-dom";
 import { useActionState } from "react";
+import { createPortal } from "react-dom";
 
-type TConfirmationModal = {
-  title: string;
-  message: string;
-  errorMessage?: string;
-  onCancel: () => void;
-  onConfirm: () => void;
-  containerId: string;
-};
 function ConfirmationModal({
   title,
   message,
@@ -19,6 +11,7 @@ function ConfirmationModal({
   containerId,
 }: TConfirmationModal) {
   const [state, formAction, isPending] = useActionState(onConfirm, null);
+
   return createPortal(
     <div className=" bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center">
       <div className="h-[18rem] w-[36rem] bg-white rounded-3xl p-4">
@@ -54,5 +47,14 @@ function ConfirmationModal({
     document.getElementById(containerId)
   );
 }
+
+type TConfirmationModal = {
+  title: string;
+  message: string;
+  errorMessage?: string;
+  onCancel: () => void;
+  onConfirm: () => void;
+  containerId: string;
+};
 
 export default ConfirmationModal;

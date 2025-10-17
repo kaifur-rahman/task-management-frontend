@@ -1,12 +1,12 @@
 "use client";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { useEffect, useState } from "react";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { getMembersForProjectAction } from "@/actions/user/getMembersforProject";
 
 const ITEM_HEIGHT = 48;
@@ -18,10 +18,6 @@ const MenuProps = {
       width: 300,
     },
   },
-};
-
-type SelectMembersInputProps = {
-  onChange?: (selected: string[]) => void;
 };
 
 export default function SelectMembersInput({
@@ -154,3 +150,7 @@ export default function SelectMembersInput({
     </FormControl>
   );
 }
+
+type SelectMembersInputProps = {
+  onChange?: (selected: string[]) => void;
+};
