@@ -22,12 +22,18 @@ export async function createNewProjectAction(
     response.message = "Not allowed";
     return response;
   }
+  // Safely convert members to string before splitting
+  const membersValue = formData.get("projectMembers");
+  const members =
+    typeof membersValue === "string"
+      ? membersValue.split(",").map((m) => m.trim())
+      : null;
   //extract values
   const newProject = {
     name: formData.get("projectName"),
     description: formData.get("projectDescription"),
     lead: leadId, //get from cookie decode
-    members: formData.get("projectMembers")?.split(",") ?? null,
+    members: members,
     priority: formData.get("projectPriority"),
     category: formData.get("projectCategory"),
   };
