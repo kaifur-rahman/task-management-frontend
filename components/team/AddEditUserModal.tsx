@@ -33,6 +33,11 @@ function AddEditUserModal({
     onCancel();
   }
 
+  const container =
+    typeof window !== "undefined" ? document.getElementById(containerId) : null;
+
+  if (!container) return null;
+
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">
       <div className="h-[28rem] w-[30rem] bg-white rounded-3xl p-4">
@@ -84,7 +89,7 @@ function AddEditUserModal({
         </div>
       </div>
     </div>,
-    document.getElementById(containerId)
+    container
   );
 }
 

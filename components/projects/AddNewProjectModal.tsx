@@ -1,5 +1,5 @@
 "use client";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import NewProjectForm from "./AddNewProjectForm";
 import { createNewProjectAction } from "@/actions/project/createNewProjects";
@@ -18,9 +18,14 @@ function AddNewProjectModal({
     creatingProjectIsPending,
   ] = useActionState(createNewProjectAction, initialResponse);
 
-  if (createNewProjectFormStatus?.success && onCancel) {
-    onCancel();
-  }
+  useEffect(() => {
+    if (createNewProjectFormStatus?.success && onCancel) onCancel();
+  }, [createNewProjectFormStatus, onCancel]);
+
+  const container =
+    typeof window !== "undefined" ? document.getElementById(containerId) : null;
+
+  if (!container) return null; // ✅ Prevents null errors
 
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">
@@ -64,7 +69,7 @@ function AddNewProjectModal({
         </div>
       </div>
     </div>,
-    document.getElementById(containerId)
+    container
   );
 }
 

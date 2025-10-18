@@ -6,7 +6,7 @@ import { postCreateNewProjectRoute } from "@/api/routes/projects";
 import { revalidatePath } from "next/cache";
 
 export async function createNewProjectAction(
-  _state: string,
+  _state: IAPIResponse,
   formData: FormData
 ): Promise<IAPIResponse> {
   const response = {

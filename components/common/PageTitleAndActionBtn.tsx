@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import React, { ReactElement, useState } from "react";
 
 function PageTitleAndActionBtn({
   pageTitle,
@@ -31,26 +31,24 @@ function PageTitleAndActionBtn({
           </button>
         )}
       </div>
-      {openModal &&
-        modalComponent &&
-        (typeof modalComponent === "object"
-          ? {
-              ...modalComponent,
-              props: {
-                ...modalComponent.props,
-                onCancel: () => setOpenModal(false),
-              },
-            }
-          : null)}
+      {openModal && modalComponent
+        ? React.cloneElement(modalComponent, {
+            onCancel: () => setOpenModal(false),
+          })
+        : null}
     </>
   );
 }
+
+type ModalWithCancel = {
+  onCancel: () => void;
+};
 
 type TPageTitleAndActionBtn = {
   pageTitle: string;
   actionBtnLabel?: string | null;
   onClickAction?: () => void;
-  modalComponent?: ReactNode;
+  modalComponent?: ReactElement<ModalWithCancel>;
 };
 
 export default PageTitleAndActionBtn;

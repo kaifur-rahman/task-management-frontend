@@ -59,13 +59,13 @@ export async function loginAction(
       });
       const cookieStore = await cookies();
       cookieStore.set("u_aid", accessToken, {
-        maxAge: 600, //TODO:change in prod in sync with backend
+        maxAge: 900, //in sync with backend
         httpOnly: false,
-        secure: false, //TODO: in prod change it
+        secure: false,
       });
       cookieStore.set("u_rid", refreshToken, {
-        maxAge: 3600, //TODO:change in prod in sync with backend
-        secure: false, //TODO: in prod change it to true
+        maxAge: 432000, //in sync with backend
+        secure: false,
         httpOnly: true,
       });
       response.message = data.message;

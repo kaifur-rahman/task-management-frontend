@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { useActionState } from "react";
 import { createPortal } from "react-dom";
 
@@ -11,6 +12,14 @@ function ConfirmationModal({
   containerId,
 }: TConfirmationModal) {
   const [state, formAction, isPending] = useActionState(onConfirm, null);
+
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setContainer(document.getElementById(containerId));
+  }, [containerId]);
+
+  if (!container) return null;
 
   return createPortal(
     <div className=" bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center">
@@ -44,7 +53,7 @@ function ConfirmationModal({
         </div>
       </div>
     </div>,
-    document.getElementById(containerId)
+    container
   );
 }
 

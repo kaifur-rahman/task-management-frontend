@@ -1,8 +1,8 @@
 import AddNewProjectModal from "./AddNewProjectModal";
 import ProjectFilterHeader from "./ProjectFilterHeader";
+import { getUserRole } from "@/utils/extractDetailsFromToken";
 import PageTitleAndActionBtn from "../common/PageTitleAndActionBtn";
 import { getMyProjectsAction } from "@/actions/project/getMyProjects";
-import { getUserRole } from "@/utils/extractDetailsFromToken";
 
 async function Projects() {
   const role = await getUserRole();

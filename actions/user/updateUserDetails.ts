@@ -14,7 +14,7 @@ export async function updateUserDetailsAction(
   };
   //extract values
   const newMember = {
-    empId: formData.get("empId"),
+    empId: formData.get("empId") as string | null,
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     email: formData.get("email") == "" ? null : formData.get("email"),
