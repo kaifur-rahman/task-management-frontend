@@ -5,9 +5,7 @@ import { getArchivedProjectsAction } from "@/actions/project/getArchivedProjects
 async function ArchivedProjects() {
   const { success, message, data } = await getArchivedProjectsAction();
   if (!success) {
-    return (
-      <h6>There is some problem fetching proejcts try logging in again</h6>
-    );
+    return <h6>There is some problem loading proejcts,kindly re-login</h6>;
   }
   return (
     <div className="flex h-auto flex-row gap-8 p-2 pb-4 flex-wrap w-full items-center mt-6">

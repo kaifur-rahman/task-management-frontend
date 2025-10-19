@@ -1,5 +1,5 @@
 export const getAllProjectsRoute = () => {
-  return "/projects";
+  return "/projects/";
 };
 
 export const getMyProjectsRoute = () => {

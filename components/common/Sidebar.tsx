@@ -9,6 +9,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+
   const handleLogout = async () => {
     await logoutAction();
     localStorage.clear();

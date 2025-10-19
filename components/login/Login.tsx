@@ -44,6 +44,7 @@ function Login() {
           type="text"
           placeholder="Employee ID"
           name="username"
+          autoCapitalize="characters"
           defaultValue={formStatus?.user ?? ""}
           required
         ></input>
@@ -54,6 +55,7 @@ function Login() {
             placeholder="Password"
             name="password"
             required
+            autoComplete="off"
           ></input>
           {showPassword ? (
             <button

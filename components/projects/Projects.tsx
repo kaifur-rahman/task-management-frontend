@@ -5,28 +5,30 @@ import PageTitleAndActionBtn from "../common/PageTitleAndActionBtn";
 import { getMyProjectsAction } from "@/actions/project/getMyProjects";
 
 async function Projects() {
-  const role = await getUserRole();
+  const userRole = await getUserRole();
   const { success, message, data } = await getMyProjectsAction();
 
   if (!success) {
-    return <h6>There is some problem loading this page</h6>;
+    return <h6>There is some problem loading this page, kindly re login</h6>;
   }
   return (
     <>
-      <PageTitleAndActionBtn
-        pageTitle="Projects"
-        actionBtnLabel={
-          role == "Admin" || role === "Lead" ? "+ New Project" : null
-        }
-        modalComponent={
-          <AddNewProjectModal
-            title="Add New Project"
-            actionBtnLabel="Add"
-            actionBtnLabelOnPending="Adding..."
-            containerId="modal-container"
-          />
-        }
-      />
+      {userRole === "Admin" || userRole === "Lead" ? (
+        <PageTitleAndActionBtn
+          pageTitle="Projects"
+          actionBtnLabel={
+            userRole == "Admin" || userRole === "Lead" ? "+ New Project" : null
+          }
+          modalComponent={
+            <AddNewProjectModal
+              title="Add New Project"
+              actionBtnLabel="Add"
+              actionBtnLabelOnPending="Adding..."
+              containerId="modal-container"
+            />
+          }
+        />
+      ) : null}
       <ProjectFilterHeader />
     </>
   );

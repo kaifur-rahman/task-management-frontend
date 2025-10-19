@@ -42,6 +42,6 @@ export const navItems = [
     name: "Purchase Requests",
     url: "/purchase-requests",
     Icon: ShoppingCartOutlinedIcon,
-    paths: ["/purchaser-requests"],
+    paths: ["/purchase-requests"],
   },
 ];

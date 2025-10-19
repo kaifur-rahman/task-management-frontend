@@ -22,7 +22,7 @@ export const putUpdateUserRoute = (empId: string) => {
   return `/users/update/${empId}`;
 };
 export const getUsersRoute = () => {
-  return "/users";
+  return "/users/";
 };
 
 export const getMembersForProjectRoute = () => {
