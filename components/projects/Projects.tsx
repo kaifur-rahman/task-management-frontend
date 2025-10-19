@@ -1,11 +1,12 @@
 import AddNewProjectModal from "./AddNewProjectModal";
 import ProjectFilterHeader from "./ProjectFilterHeader";
-import { getUserRole } from "@/utils/extractDetailsFromToken";
+import { getUserRole, getUserSubRole } from "@/utils/extractDetailsFromToken";
 import PageTitleAndActionBtn from "../common/PageTitleAndActionBtn";
 import { getMyProjectsAction } from "@/actions/project/getMyProjects";
 
 async function Projects() {
   const userRole = await getUserRole();
+  const userSubRole = await getUserSubRole();
   const { success, message, data } = await getMyProjectsAction();
 
   if (!success) {
@@ -13,7 +14,8 @@ async function Projects() {
   }
   return (
     <>
-      {userRole === "Admin" || userRole === "Lead" ? (
+      {userRole === "Admin" ||
+      (userRole === "Lead" && userSubRole != "Purchase Lead") ? (
         <PageTitleAndActionBtn
           pageTitle="Projects"
           actionBtnLabel={

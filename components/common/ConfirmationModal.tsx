@@ -22,7 +22,7 @@ function ConfirmationModal({
   if (!container) return null;
 
   return createPortal(
-    <div className=" bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center">
+    <div className=" bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-50">
       <div className="h-[18rem] w-[36rem] bg-white rounded-3xl p-4">
         <div className="flex flex-col gap-4 items-start h-full justify-between p-4">
           <h6 className="font-extrabold text-2xl tracking-wide">{title}</h6>
