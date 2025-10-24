@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { IProject } from "@/interface/projects";
-import CallMadeIcon from "@mui/icons-material/CallMade";
+// import CallMadeIcon from "@mui/icons-material/CallMade";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import { updateArchivedAction } from "@/actions/project/updateArchived";
@@ -14,12 +14,15 @@ async function Project({ project }: TProject) {
   return (
     <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between  border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
       <div className=" flex flex-row justify-between items-center">
+        {/* project name */}
         <h6 className="font-bold tracking-normal">{project.name}</h6>
+        {/* action buttons */}
         <div className="flex flex-row gap-2 justify-end items-end">
+          {/* archive action btn */}
           {userEmpId == project.lead.emp_id || userRole == "Admin" ? (
             <div className="group">
               <form id="project-archived-form" action={updateArchivedAction}>
-                {/*pass project id and current value to formaction*/}
+                {/*pass project id and current value to form action*/}
                 <input
                   type="hidden"
                   name="projectId"
@@ -48,6 +51,7 @@ async function Project({ project }: TProject) {
               </form>
             </div>
           ) : null}
+          {/* project member details */}
           <div className="group">
             <IconButton size="small" sx={{ color: "", ml: "" }}>
               <Diversity3Icon />
@@ -69,23 +73,29 @@ async function Project({ project }: TProject) {
               </div>
             </IconButton>
           </div>
-          <div className="group">
+          {/* project details */}
+          {/* <div className="group">
             <IconButton size="small" sx={{ color: "#faa325", ml: "0.1rem" }}>
               <CallMadeIcon />
               <span className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white">
                 Details
               </span>
             </IconButton>
-          </div>
+          </div> */}
         </div>
       </div>
+      {/* horizontal line */}
       <div className="w-full border-t border-gray-300 -mt-4"></div>
-
+      {/* project id */}
+      <div className="w-full flex justify-end text-primary2 italic">
+        {project.project_id}
+      </div>
+      {/* project description */}
       <h6 className="mt-2 text-secondaryText line-clamp-2 font-extralight">
         {project.description}
       </h6>
       {/* auto progress */}
-      {/* other details */}
+      {/* priority category and lead details */}
       <div className="flex justify-between">
         <div>
           <h6 className="text-sm text-secondaryText font-light italic">

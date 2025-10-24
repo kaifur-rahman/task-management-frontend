@@ -10,7 +10,7 @@ function layout({ children }: Readonly<{ children: React.ReactNode }>) {
           <Sidebar />
           <div
             id="team-layout"
-            className="flex-1 w-full h-full md:ml-[4rem] justify-center items-center p-4 pt-16  overflow-y-auto"
+            className="flex-1 w-full h-full md:ml-[4rem] justify-center items-center p-4 pt-16 overflow-y-auto"
           >
             {children}
           </div>

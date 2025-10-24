@@ -8,7 +8,7 @@ async function AllProjects() {
     return <h6>There is some problem loading proejcts,kindly re-login</h6>;
   }
   return (
-    <div className="flex h-auto flex-row gap-8 p-2 pb-4 flex-wrap w-full items-center mt-6">
+    <div className="flex h-auto flex-row gap-8 p-2 pb-4 flex-wrap w-full items-center mt-6 overflow-y-auto">
       {data?.length == 0 ? (
         <div className="w-full h-full flex justify-center items-center italic">
           <h6 className="text-secondaryText text-center">
