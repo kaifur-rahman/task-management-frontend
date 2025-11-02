@@ -21,18 +21,27 @@ const MenuProps = {
 };
 
 export default function SelectMembersInput({
+  data,
   onChange,
 }: SelectMembersInputProps) {
   const [members, setMembers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+  const [selectedMembers, setSelectedMembers] = useState<string[]>(data ?? []);
 
+  //fetches memeber list
   useEffect(() => {
     getMembersForProjectAction().then(({ success, data }) => {
       if (success) setMembers(data);
       setLoading(false);
     });
   }, []);
+
+  //initialize selected memebers
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setSelectedMembers(data.map((member: any) => member.emp_id));
+    }
+  }, [data]);
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
@@ -152,5 +161,6 @@ export default function SelectMembersInput({
 }
 
 type SelectMembersInputProps = {
+  data?: any;
   onChange?: (selected: string[]) => void;
 };

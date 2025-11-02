@@ -25,7 +25,7 @@ function AddNewProjectModal({
   const container =
     typeof window !== "undefined" ? document.getElementById(containerId) : null;
 
-  if (!container) return null; // ✅ Prevents null errors
+  if (!container) return null;
 
   return createPortal(
     <div className="bg-black/20 backdrop-blur-xs fixed inset-0 flex justify-center items-center z-99">

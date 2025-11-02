@@ -9,7 +9,7 @@ async function MyProjects() {
   }
 
   return (
-    <div className="flex flex-row gap-8 p-2 flex-wrap w-full items-center justify-baseline mt-6 overflow-y-auto">
+    <div className="flex flex-row gap-8 p-2 flex-wrap w-full items-center justify-baseline mt-6 overflow-y-auto ">
       {data.length == 0 ? (
         <div className="w-full h-full flex justify-center items-center italic">
           <h6 className="text-secondaryText text-center">

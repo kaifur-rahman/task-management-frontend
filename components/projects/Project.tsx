@@ -6,18 +6,26 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import { updateArchivedAction } from "@/actions/project/updateArchived";
 import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import { getUserEmpId, getUserRole } from "@/utils/extractDetailsFromToken";
+import UpdateProjectModal from "./UpdateProjectModal";
 
 async function Project({ project }: TProject) {
   const userEmpId = await getUserEmpId();
   const userRole = await getUserRole();
 
   return (
-    <div className=" hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between  border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
+    <div className="mt-4  hover:bg-primary/10 flex flex-col gap-3 shadow-md justify-between  border-solid border-1 border-secondaryText/20 w-[22rem] h-auto min-h-[10rem]  rounded-xl p-3 hover:cursor-pointer">
       <div className=" flex flex-row justify-between items-center">
         {/* project name */}
         <h6 className="font-bold tracking-normal">{project.name}</h6>
         {/* action buttons */}
         <div className="flex flex-row gap-2 justify-end items-end">
+          {/* update action btn */}
+          {userEmpId == project.lead.emp_id || userRole == "Admin" ? (
+            <UpdateProjectModal
+              projectDetails={project}
+              containerId="modal-container"
+            />
+          ) : null}
           {/* archive action btn */}
           {userEmpId == project.lead.emp_id || userRole == "Admin" ? (
             <div className="group">
@@ -52,11 +60,11 @@ async function Project({ project }: TProject) {
             </div>
           ) : null}
           {/* project member details */}
-          <div className="group">
+          <div className="group relative">
             <IconButton size="small" sx={{ color: "", ml: "" }}>
               <Diversity3Icon />
               <div
-                className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white whitespace-normal"
+                className="z-99 right-[2rem] absolute hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white whitespace-normal"
                 style={{ width: "max-content" }}
               >
                 {project.lead.emp_id} {project.lead.first_name}{" "}
