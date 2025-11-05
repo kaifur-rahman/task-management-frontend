@@ -1,13 +1,8 @@
-import {
-  getUserFirstName,
-  getUserLastName,
-} from "@/utils/extractDetailsFromToken";
-
-export const getUserFirstNameLastNameChar = async (): Promise<
-  string | undefined
-> => {
-  const firstName = await getUserFirstName();
-  const lastName = await getUserLastName();
+"use client";
+export const getUserFirstNameLastNameChar = (
+  firstName: string,
+  lastName: string
+) => {
   const firstAndLastChar =
     firstName && lastName
       ? firstName[0] + lastName[0]

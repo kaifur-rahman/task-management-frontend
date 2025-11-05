@@ -2,9 +2,9 @@
 import { useActionState, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import UpdateProjectForm from "./UpdateProjectForm";
+import UpdateProjectForm from "../UpdateProjectForm";
 import { updateProjectAction } from "@/actions/project/updateProject";
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
 function UpdateProjectModal({
   projectDetails,
@@ -89,7 +89,7 @@ function UpdateProjectModal({
           sx={{ color: "", ml: "" }}
           onClick={() => setOpenModal(true)}
         >
-          <EditIcon />
+          <ModeEditOutlinedIcon />
           <span className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 text-sm rounded-md bg-secondary text-white">
             Update
           </span>

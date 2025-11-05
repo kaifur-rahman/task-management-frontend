@@ -17,3 +17,7 @@ export const putUpdateProjectRoute = (projectId: string) => {
 export const postCreateNewProjectRoute = () => {
   return "/projects/create";
 };
+
+export const deleteProjectRoute = (projectId: string) => {
+  return `/projects/delete/${projectId}`;
+};
